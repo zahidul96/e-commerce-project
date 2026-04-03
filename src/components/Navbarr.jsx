@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-const Navbarr = () => {
+const Navbarr = (props) => {
   return (
     <>
       <Navbar expand="lg" className="bg-dark navbar-dark">
@@ -19,7 +19,7 @@ const Navbarr = () => {
                 ABOUT
               </Nav.Link>
             </Nav>
-            <Button variant="outline-light">Cart 0</Button>
+            <Button variant="outline-light" onClick={props.onshow}>Cart 0</Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>

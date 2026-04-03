@@ -1,11 +1,17 @@
 import "./App.css";
+import React, { useState } from "react";
 import Banner from "./components/Banner";
 import CartButton from "./components/CartButton";
 import Footer from "./components/Footer";
 import MerchSection from "./components/MerchSection";
 import MusicSection from "./components/MusicSection";
 import Navbarr from "./components/Navbarr";
+import CartItems from "./components/cart/CartItems";
 const App = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const productsArr = [
     {
       title: "Colors",
@@ -42,12 +48,13 @@ const App = () => {
   ];
   return (
     <>
-      <Navbarr />
+      <Navbarr onshow={handleShow} />
       <Banner />
-      <MusicSection products={productsArr}/>
+      <MusicSection products={productsArr} />
       <MerchSection />
       <CartButton />
       <Footer />
+      <CartItems show={show} onhide={handleClose} />
     </>
   );
 };
