@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
+import CartContext from "../store/CartContext";
 import Button from 'react-bootstrap/Button';
 const Navbarr = (props) => {
+  const ctx = useContext(CartContext);
+  const cartItemCount = ctx.item.reduce((total, currentItem) => total + currentItem.quantity, 0);
   return (
     <>
       <Navbar expand="lg" className="bg-dark navbar-dark">
@@ -19,7 +22,7 @@ const Navbarr = (props) => {
                 ABOUT
               </Nav.Link>
             </Nav>
-            <Button variant="outline-light" onClick={props.onshow}>Cart 0</Button>
+            <Button variant="outline-light" onClick={props.onshow}>Cart {cartItemCount}</Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>

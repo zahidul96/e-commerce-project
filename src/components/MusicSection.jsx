@@ -1,7 +1,16 @@
+import { useContext } from "react";
 import "./MusicSection.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import CartContext from "../store/CartContext";
 const MusicSection = (props) => {
+  const ctx = useContext(CartContext);
+  const addToCartItems = (prods)=>{
+    console.log("Adding item:", prods.title);
+    ctx.addItems(prods);
+  }
+  
   return (
+    
     <>
       <Container fluid>
         <Row>
@@ -18,7 +27,7 @@ const MusicSection = (props) => {
               </div>
               <div className="d-flex justify-content-center mt-3 mb-5" style={{gap:"160px"}}>
                 <span>${product.price}</span>
-                <Button variant="primary">Add to Cart</Button>
+                <Button variant="primary" onClick={()=>{addToCartItems(product)}}>Add to Cart</Button>
               </div>
             </Col>
           ))}

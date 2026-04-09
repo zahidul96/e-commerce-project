@@ -7,6 +7,7 @@ import MerchSection from "./components/MerchSection";
 import MusicSection from "./components/MusicSection";
 import Navbarr from "./components/Navbarr";
 import CartItems from "./components/cart/CartItems";
+import CartContextProvider from "./store/CartContextProvider";
 const App = () => {
   const [show, setShow] = useState(false);
 
@@ -48,13 +49,15 @@ const App = () => {
   ];
   return (
     <>
-      <Navbarr onshow={handleShow} />
-      <Banner />
-      <MusicSection products={productsArr} />
-      <MerchSection />
-      <CartButton />
-      <Footer />
-      <CartItems show={show} onhide={handleClose} />
+      <CartContextProvider>
+        <Navbarr onshow={handleShow} />
+        <Banner />
+        <MusicSection products={productsArr} />
+        <MerchSection />
+        <CartButton />
+        <Footer />
+        <CartItems show={show} onhide={handleClose} />
+      </CartContextProvider>
     </>
   );
 };
