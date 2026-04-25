@@ -1,18 +1,11 @@
 import "./App.css";
 import React, { useState } from "react";
-import Banner from "./components/Banner";
-import CartButton from "./components/CartButton";
-import Footer from "./components/Footer";
-import MerchSection from "./components/MerchSection";
-import MusicSection from "./components/MusicSection";
-import Navbarr from "./components/Navbarr";
-import CartItems from "./components/cart/CartItems";
-import CartContextProvider from "./store/CartContextProvider";
-const App = () => {
-  const [show, setShow] = useState(false);
+import AboutPage from "./pages/aboutPage/AboutPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./pages/homePage/HomePage";
+import StorePage from "./pages/storePage/StorePage";
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+const App = () => {
   const productsArr = [
     {
       title: "Colors",
@@ -47,17 +40,28 @@ const App = () => {
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
     },
   ];
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const router = createBrowserRouter([
+    { path: "/", element: <HomePage /> },
+    {
+      path: "/store",
+      element: (
+        <StorePage
+          products={productsArr}
+          show={show}
+          onShow={handleShow}
+          onhide={handleClose}
+        />
+      ),
+    },
+    { path: "/about", element: <AboutPage /> },
+  ]);
   return (
     <>
-      <CartContextProvider>
-        <Navbarr onshow={handleShow} />
-        <Banner />
-        <MusicSection products={productsArr} />
-        <MerchSection />
-        <CartButton />
-        <Footer />
-        <CartItems show={show} onhide={handleClose} />
-      </CartContextProvider>
+      <RouterProvider router={router} />
     </>
   );
 };

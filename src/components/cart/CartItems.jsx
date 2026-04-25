@@ -4,6 +4,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import CartContext from "../../store/CartContext";
 const CartItems = (props) => {
  const {item} = useContext(CartContext);
+ console.log(props)
   return (
     <>
       <Offcanvas show={props.show} onHide={props.onhide} placement="end">
@@ -39,6 +40,7 @@ const CartItems = (props) => {
                 {element.quantity}
               </Col>
             </Row>
+            
           ))}
         </Offcanvas.Body>
       </Offcanvas>
