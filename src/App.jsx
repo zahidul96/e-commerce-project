@@ -7,6 +7,7 @@ import StorePage from "./pages/storePage/StorePage";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const productsArr = [
     {
       title: "Colors",
@@ -45,15 +46,20 @@ const App = () => {
        const fetchProducts = async ()=>{
         try{
           setLoading(true);
-          const response = await fetch('https://swapi.info/api/films');
+          setError(null);
+          const response = await fetch('https://swapi.info/api/film');
           if(!response.ok){
-            throw new Error('Failed to fetch products');
+            throw new Error('Something went wrong...retrying');
           }
           const data = await response.json();
           console.log(data)
         }
         catch(error){
-          console.log("Error fetching", error);
+          console.log(error);
+          setError(error.message);
+          setTimeout(()=>{
+            fetchProducts();
+          },5000)
         }
         finally{
           setLoading(false);
@@ -61,6 +67,7 @@ const App = () => {
        }
        fetchProducts();
   },[])
+  console.log(error)
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
