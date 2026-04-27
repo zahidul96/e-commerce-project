@@ -6,6 +6,7 @@ import HomePage from "./pages/homePage/HomePage";
 import StorePage from "./pages/storePage/StorePage";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
   const productsArr = [
     {
       title: "Colors",
@@ -43,6 +44,7 @@ const App = () => {
   useEffect(()=>{
        const fetchProducts = async ()=>{
         try{
+          setLoading(true);
           const response = await fetch('https://swapi.info/api/films');
           if(!response.ok){
             throw new Error('Failed to fetch products');
@@ -52,6 +54,9 @@ const App = () => {
         }
         catch(error){
           console.log("Error fetching", error);
+        }
+        finally{
+          setLoading(false);
         }
        }
        fetchProducts();
