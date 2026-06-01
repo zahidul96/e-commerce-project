@@ -17,6 +17,9 @@ const HomeNavbar = () => {
               <Nav.Link href="/about" className="text-white fs-5 ms-3">
                 ABOUT
               </Nav.Link>
+              <Nav.Link href="/contact" className="text-white fs-5 ms-3">
+                CONTACT US
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -4,6 +4,7 @@ import AboutPage from "./pages/aboutPage/AboutPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/homePage/HomePage";
 import StorePage from "./pages/storePage/StorePage";
+import ContactUsPage from "./pages/contactUsPage/ContactUsPage";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -47,7 +48,7 @@ const App = () => {
         try{
           setLoading(true);
           setError(null);
-          const response = await fetch('https://swapi.info/api/film');
+          const response = await fetch('https://swapi.info/api/films');
           if(!response.ok){
             throw new Error('Something went wrong...retrying');
           }
@@ -86,6 +87,7 @@ const App = () => {
       ),
     },
     { path: "/about", element: <AboutPage /> },
+    { path: "/contact", element : <ContactUsPage/>},
   ]);
   return (
     <>

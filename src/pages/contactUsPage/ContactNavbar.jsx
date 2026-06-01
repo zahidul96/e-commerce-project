@@ -1,18 +1,10 @@
-import React, { useContext } from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
-import CartContext from "../store/CartContext";
-import Button from "react-bootstrap/Button";
-import "./Navbarr.css";
-const Navbarr = (props) => {
-  const ctx = useContext(CartContext);
-  const cartItemCount = ctx.item.reduce(
-    (total, currentItem) => total + currentItem.quantity,
-    0,
-  );
+import React from "react";
+import { Navbar, Container, Nav } from "react-bootstrap";
+const ContactNavbar = () => {
   return (
     <>
       <Navbar expand="lg" className="bg-dark navbar-dark">
-        <Container>
+        <Container fluid>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
@@ -29,19 +21,10 @@ const Navbarr = (props) => {
                 CONTACT US
               </Nav.Link>
             </Nav>
-            <div className="cart-button-container">
-              <Button
-                variant="outline-info"
-                className="text-white"
-                onClick={props.onShow}
-              >
-                Cart {cartItemCount}
-              </Button>
-            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
   );
 };
-export default Navbarr;
+export default ContactNavbar;
