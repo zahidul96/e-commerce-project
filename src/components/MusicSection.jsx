@@ -1,16 +1,16 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import "./MusicSection.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import CartContext from "../store/CartContext";
 const MusicSection = (props) => {
   const ctx = useContext(CartContext);
-  const addToCartItems = (prods)=>{
+  const addToCartItems = (prods) => {
     console.log("Adding item:", prods.title);
     ctx.addItems(prods);
-  }
-  
+  };
+
   return (
-    
     <>
       <Container fluid>
         <Row>
@@ -23,11 +23,23 @@ const MusicSection = (props) => {
             <Col lg={6} key={index}>
               <h3 className=" display-8 text-center">{product.title}</h3>
               <div className="d-flex justify-content-center">
-                <img src={product.imageUrl} alt={product.title} />
+                <Link to= {`/store/${product.title}`}>
+                  <img src={product.imageUrl} alt={product.title} />
+                </Link>
               </div>
-              <div className="d-flex justify-content-center mt-3 mb-5" style={{gap:"160px"}}>
+              <div
+                className="d-flex justify-content-center mt-3 mb-5"
+                style={{ gap: "160px" }}
+              >
                 <span>${product.price}</span>
-                <Button variant="primary" onClick={()=>{addToCartItems(product)}}>Add to Cart</Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    addToCartItems(product);
+                  }}
+                >
+                  Add to Cart
+                </Button>
               </div>
             </Col>
           ))}
