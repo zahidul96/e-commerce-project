@@ -20,6 +20,9 @@ const HomeNavbar = () => {
               <Nav.Link href="/contact" className="text-white fs-5 ms-3">
                 CONTACT US
               </Nav.Link>
+              <Nav.Link href="/login" className="text-white fs-5 ms-3">
+                LOGIN
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

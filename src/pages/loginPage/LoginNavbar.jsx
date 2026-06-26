@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-const ContactNavbar = () => {
+const LoginNavbar = () => {
   return (
     <>
       <Navbar expand="lg" className="bg-dark navbar-dark">
@@ -30,4 +30,4 @@ const ContactNavbar = () => {
     </>
   );
 };
-export default ContactNavbar;
+export default LoginNavbar;

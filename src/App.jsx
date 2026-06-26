@@ -6,6 +6,7 @@ import HomePage from "./pages/homePage/HomePage";
 import StorePage from "./pages/storePage/StorePage";
 import ContactUsPage from "./pages/contactUsPage/ContactUsPage";
 import ProductDetail from "./pages/ProductDetail";
+import LoginPage from "./pages/loginPage/LoginPage";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -89,7 +90,8 @@ const App = () => {
     },
     { path: "/about", element: <AboutPage /> },
     { path: "/contact", element : <ContactUsPage/>},
-    { path: "/store/:productId", element : <ProductDetail products={productsArr}/>}
+    { path: "/store/:productId", element : <ProductDetail products={productsArr}/>},
+    { path: "/login", element : <LoginPage/>} 
   ]);
   return (
     <>
