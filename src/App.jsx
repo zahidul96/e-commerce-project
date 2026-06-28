@@ -61,7 +61,7 @@ const App = () => {
           throw new Error("Something went wrong...retrying");
         }
         const data = await response.json();
-        console.log(data);
+        
       } catch (error) {
         console.log(error);
         setError(error.message);
@@ -71,10 +71,11 @@ const App = () => {
       } finally {
         setLoading(false);
       }
+      
     };
     fetchProducts();
+    
   }, []);
-  console.log(error);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

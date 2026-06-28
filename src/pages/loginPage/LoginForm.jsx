@@ -12,7 +12,7 @@ const LoginForm = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBC9Ukr8M3GdM-iAjy_NODoEpWp3OkKj6o",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBB7QrrzH06y2C1B2_Nc1nxpviaokj_qMw",
       {
         method: "POST",
         body: JSON.stringify({
@@ -28,7 +28,9 @@ const LoginForm = () => {
       .then((res) => {
         if (res.ok) {
           return res.json().then((data) => {
-            authCtx.login(data.idToken);
+            authCtx.login(data.idToken,data.email);
+            console.log("login success")
+            console.log(data)
             navigate('/store', {replace:true})
           });
         } else {
@@ -43,6 +45,7 @@ const LoginForm = () => {
       })
       .catch((err) => {
         alert(err.message);
+        console.log(err)
       });
       emailInputRef.current.value = ""
       passwordInputRef.current.value = ""

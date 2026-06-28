@@ -3,11 +3,42 @@ import { Link } from "react-router-dom";
 import "./MusicSection.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import CartContext from "../store/CartContext";
+import AuthContext from "../auth/AuthContext";
 const MusicSection = (props) => {
   const ctx = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
+  const addUserProductHandler = async (productItem) => {
+    if (!authCtx.email) {
+      console.error("User email is missing. Log in again.");
+      return;
+    }
+    
+    try {
+      const response = await fetch(
+        `https://crudcrud.com/api/b250b24394a2419ab59c638c664faca9/cart${authCtx.email}`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            title: productItem.title,
+            price: productItem.price,
+            image: productItem.imageUrl,
+            quantity: 1,
+          }),
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+      if (!response.ok) {
+        throw new Error("failed to store item in crud");
+      }
+      const data = await response.json();
+      console.log("Successfully saved to CRUD CRUD:", data);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
   const addToCartItems = (prods) => {
-    console.log("Adding item:", prods.title);
     ctx.addItems(prods);
+    addUserProductHandler(prods);
   };
 
   return (
@@ -23,7 +54,7 @@ const MusicSection = (props) => {
             <Col lg={6} key={index}>
               <h3 className=" display-8 text-center">{product.title}</h3>
               <div className="d-flex justify-content-center">
-                <Link to= {`/store/${product.title}`}>
+                <Link to={`/store/${product.title}`}>
                   <img src={product.imageUrl} alt={product.title} />
                 </Link>
               </div>
